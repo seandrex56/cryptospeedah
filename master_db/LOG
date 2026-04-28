@@ -1,0 +1,6 @@
+Recovered manifest with next_file=3 manifest_num=2 log_num=0 prev_log_num=0 last_seq=0
+reusing manifest "master_db/MANIFEST-000001"
+Recovering log file "/data/data/com.termux/files/home/btc_hunter/master_db/000003.log"
+Start write of L0 table 000003
+L0 table 000003 has 3547814 bytes
+Deleting file type=Log num=3
