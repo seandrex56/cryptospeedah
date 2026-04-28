@@ -1,4 +1,3 @@
-# Gamitin ang Rust image para sa compilation
 FROM rust:latest
 
 # 1. Install Python at Streamlit
@@ -7,20 +6,19 @@ RUN pip3 install streamlit --break-system-packages
 
 WORKDIR /app
 
-# 2. Kopyahin ang lahat ng files (Cargo.toml, src, app.py)
+# 2. Kopyahin ang lahat ng files
 COPY . .
 
 # 3. I-build ang Rust project
 RUN cargo build --release
 
-# 4. DITO ANG SOLUSYON: I-rename natin yung output para laging "btc_hunter" ang pangalan
+# 4. I-rename ang binary para sigurado
 RUN BIN_NAME=$(grep '^name =' Cargo.toml | sed 's/.*= "//;s/"//') && \
     cp target/release/$BIN_NAME ./btc_hunter && \
     chmod +x ./btc_hunter
 
-# 5. Silipin natin kung nandoon ba talaga (para sa logs natin)
-RUN ls -l ./btc_hunter
+# 5. Requirement para sa Streamlit (Importante sa Render)
+RUN echo "streamlit" > requirements.txt
 
-EXPOSE 7860
-
-CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]
+# 6. Gamitin ang dynamic port ng Render
+CMD ["sh", "-c", "streamlit run app.py --server.port $PORT --server.address 0.0.0.0"]
