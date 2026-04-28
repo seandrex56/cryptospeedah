@@ -1,9 +1,13 @@
 [package]
-name = "cryptospeedah"
+name = "btc_hunter"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bip39 = "2.0.0"
-warp = "0.3"
-tokio = { version = "1", features = ["full"] }
+bitcoin = "0.30.3"
+bip39 = { package = "tiny-bip39", version = "1.0.0" }  # Eto ang teknik!
+rand = "0.8.5"
+rayon = "1.8.0"
+rusty-leveldb = "1.0.8"
+secp256k1 = { version = "0.27.0", features = ["rand-std"] }
+fs2 = "0.4.3"
